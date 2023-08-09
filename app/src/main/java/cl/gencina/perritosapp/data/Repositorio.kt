@@ -1,5 +1,6 @@
 package cl.gencina.perritosapp.data
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import cl.gencina.perritosapp.data.local.RazaDao
 import cl.gencina.perritosapp.data.local.RazaEntity
@@ -17,5 +18,19 @@ class Repositorio(private val razaAPI: RazaAPI, private val razaDao: RazaDao) {
             }
         }
     }
+
+    suspend fun obtenerFotos(raza:String): MutableList<String> {
+        val response = razaAPI.getRazaImagesData(raza)
+        var lista = mutableListOf<String>()
+        lista.clear()
+        if(response.isSuccessful){
+            val message = response.body()?.message
+            message?.forEach {
+                lista.add(it)
+            }
+        }
+        return lista
+    }
+
     fun obtenerRazas(): LiveData<List<RazaEntity>> = razaDao.getAll()
 }
