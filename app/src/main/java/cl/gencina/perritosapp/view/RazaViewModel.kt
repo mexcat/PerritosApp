@@ -18,7 +18,7 @@ class RazaViewModel(application: Application) : AndroidViewModel(application){
     }
 
     fun getData() = viewModelScope.launch {
-        repositorio.obtenerRazas()
+        repositorio.cargarRazaData()
     }
-
+    fun razasLiveData() = repositorio.obtenerRazas()
 }

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph.xml">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/listaRazaFragment">
 
+    <fragment
+        android:id="@+id/listaRazaFragment"
+        android:name="cl.gencina.perritosapp.view.ListaRazaFragment"
+        android:label="fragment_lista_raza"
+        tools:layout="@layout/fragment_lista_raza" >
+        <action
+            android:id="@+id/action_listaRazaFragment_to_listaFotosFragment"
+            app:destination="@id/listaFotosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaFotosFragment"
+        android:name="cl.gencina.perritosapp.view.ListaFotosFragment"
+        android:label="fragment_lista_fotos"
+        tools:layout="@layout/fragment_lista_fotos" />
 </navigation>
