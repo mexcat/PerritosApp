@@ -19,4 +19,10 @@ interface RazaDao {
 
     @Query("Select * from tabla_raza where nombreRaza = :id")
     fun getRaza(id:String): LiveData<RazaEntity>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(item : RazaImageEntity)
+
+
 }
