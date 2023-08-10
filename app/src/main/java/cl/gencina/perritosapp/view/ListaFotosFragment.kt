@@ -1,7 +1,6 @@
 package cl.gencina.perritosapp.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -29,16 +28,17 @@ class ListaFotosFragment : Fragment() {
     ): View {
         binding = FragmentListaFotosBinding.inflate(layoutInflater,container,false)
         binding.tvNombreRaza.text = param1?.uppercase(Locale.ROOT)
-        viewModel.getFotos(param1.toString()).invokeOnCompletion {
-            initAdapter()
-        }
+        viewModel.getFotos(param1.toString())
+        initAdapter()
+
         return binding.root
     }
 
     private fun initAdapter(){
-        Log.e("viewModel.listaFotos.size", viewModel.listaFotos.toString())
         val adapter = AdapterListaRazaFotos()
         binding.rvListaFotos.adapter = adapter
-        adapter.setData(viewModel.listaFotos)
+        viewModel.fotosRazasLiveData(param1.toString()).observe(viewLifecycleOwner){
+            adapter.setData(it)
+        }
     }
 }

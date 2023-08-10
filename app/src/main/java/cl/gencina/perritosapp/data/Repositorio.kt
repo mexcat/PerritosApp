@@ -22,7 +22,7 @@ class Repositorio(private val razaAPI: RazaAPI, private val razaDao: RazaDao) {
         }
     }
 
-    suspend fun obtenerFotos(raza:String): MutableList<String> {
+    suspend fun cargarFotos(raza:String): MutableList<String> {
         val response = razaAPI.getRazaImagesData(raza)
         val lista = mutableListOf<String>()
         lista.clear()
@@ -39,4 +39,5 @@ class Repositorio(private val razaAPI: RazaAPI, private val razaDao: RazaDao) {
     }
 
     fun obtenerRazas(): LiveData<List<RazaEntity>> = razaDao.getAll()
+    fun obtenerFotosPorRaza(id:String): LiveData<List<RazaImageEntity>> = razaDao.getImagenRaza(id)
 }

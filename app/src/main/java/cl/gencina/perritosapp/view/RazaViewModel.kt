@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 
 class RazaViewModel(application: Application) : AndroidViewModel(application){
     private val repositorio:Repositorio
-    var listaFotos = mutableListOf<String>()
     init{
         val api = RazaRetroFit.getRetrofitRaza()
         val database = RazaDatabase.getDatabase(application).RazaDao()
@@ -21,8 +20,9 @@ class RazaViewModel(application: Application) : AndroidViewModel(application){
         repositorio.cargarRazaData()
     }
     fun getFotos(raza:String) = viewModelScope.launch {
-        listaFotos = repositorio.obtenerFotos(raza)
+        repositorio.cargarFotos(raza)
     }
 
     fun razasLiveData() = repositorio.obtenerRazas()
+    fun fotosRazasLiveData(raza:String) = repositorio.obtenerFotosPorRaza(raza)
 }
