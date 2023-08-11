@@ -14,8 +14,7 @@ class Repositorio(private val razaAPI: RazaAPI, private val razaDao: RazaDao) {
         if(response.isSuccessful){
             val keys = response.body()?.message?.keys
             keys?.forEach {
-                val razaEntity = RazaEntity(it)
-                razaDao.insert(razaEntity)
+                razaDao.insert(it.toRazaEntity())
             }
         }else{
             Log.e("repositorio", response.body().toString())
@@ -29,7 +28,7 @@ class Repositorio(private val razaAPI: RazaAPI, private val razaDao: RazaDao) {
         if(response.isSuccessful){
             val message = response.body()?.message
             message?.forEach {
-                val perroDetalle = RazaImageEntity(raza, it)
+                val perroDetalle = it.toEntity(raza)
                 razaDao.insert(perroDetalle)
             }
         }else{
