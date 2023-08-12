@@ -1,7 +1,8 @@
 package cl.gencina.perritosapp.data
 
-import org.junit.Assert.*
 
+import com.google.common.truth.Truth
+import org.junit.Assert
 import org.junit.Test
 
 class MapperKtTest {
@@ -14,7 +15,10 @@ class MapperKtTest {
         //HAGO ESTO
         val result = id.toRazaEntity()
         //Y ESPERO ESTO
-        assertEquals(id, result.nombreRaza)
+
+        //Assert.assertEquals(id, result.nombreRaza)
+        //o
+        Truth.assertThat(result.nombreRaza).isEqualTo(id)//
 
     }
 
@@ -28,8 +32,8 @@ class MapperKtTest {
         val result = url.toEntity(id)
 //        "url".toEntity("idNombreRaza")
         //Y ESPERO ESTO
-        assertEquals(id, result.razaNombre)
-        assertEquals(url, result.urlImage)
+        Assert.assertEquals(id, result.razaNombre)
+        Assert.assertEquals(url, result.urlImage)
 
     }
 }
